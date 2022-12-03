@@ -1,2 +1,7 @@
 # created by virtualenv automatically
 
+chromedriver.exe
+ghostdriver.log
+phantomjs.exe
+
+
