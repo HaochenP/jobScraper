@@ -6,12 +6,13 @@ from selenium.common.exceptions import NoSuchElementException
 from bs4 import BeautifulSoup
 import pandas as pd
 from extract_skills import skill_extractor, extract_words
-import spacy
 from selenium.webdriver.chrome.options import Options
 import re
 
+
 def remove_char(text):
     return re.sub('[^A-Za-z0-9\s£]+', '', text)
+
 
 def get_url_indeed(title, location):
 
@@ -53,9 +54,6 @@ def get_url_indeed(title, location):
     return contents
 
 
-
-
-
 def scrape_job_details_indeed(contents):
     jobs_list = []
     for content in contents:
@@ -75,6 +73,7 @@ def scrape_job_details_indeed(contents):
 
     dataframe = pd.DataFrame(jobs_list)
     dataframe.to_csv("indeed.csv")
+
 
 def scrape_job_details_reed(title, location):
     url = "https://www.reed.co.uk/jobs/{}-jobs-in-{}?pageno={}"
@@ -142,28 +141,12 @@ def scrape_jobs_details_totaljobs(title, location):
     dataframe.to_csv("totaljobs.csv")
 
 
-
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0",
                "Accept-Encoding": "gzip, deflate",
                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT": "1",
                "Connection": "close", "Upgrade-Insecure-Requests": "1"}
-    """
-    title = input("Title")
-    location = input("Location")
-    indeed_url = get_url_indeed(title, location)
-    df = scrape_job_details(indeed_url)
-    """
 
-    """
-    location = location if location != "" else None
-    df = scrape_job_details_reed(title, location)
-    print(df)
-    df.to_csv("jobs2.csv") 
-    """
     skills_extractor = skill_extractor()
     title = "Software developer"
     location = ""
